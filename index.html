@@ -49,6 +49,24 @@ body.intro-on .hero *, body.intro-on .hero *::before, body.intro-on .hero *::aft
 .stat .chip b { width: 16px; height: 16px; border-radius: 50%; background: #fff; flex: none; }
 @media (max-width: 700px) { .stats { grid-template-columns: minmax(0, 1fr); gap: 38px; } }
 </style>
+<style id="certs-css">
+.certs { padding-block: 40px 70px; }
+.certs-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 28px; margin-top: 44px; align-items: start; }
+.cert-feature { display: block; position: relative; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #0a0a0a; }
+.cert-feature img { display: block; width: 100%; height: auto; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.cert-feature:hover img { transform: scale(1.03); }
+.cert-feature .view { position: absolute; right: 14px; bottom: 14px; padding: 10px 16px; border-radius: 999px; background: #1455B5; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.cert-list { display: grid; gap: 14px; }
+.cert { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; transition: border-color .3s, background .3s; }
+.cert:hover { border-color: #1455B5; background: rgba(20,85,181,.08); }
+.cert .n { grid-row: span 3; font-family: var(--display); font-size: 40px; line-height: 1; color: #1455B5; }
+.cert h3 { margin: 0; font-size: clamp(16px, 1.8vw, 21px); line-height: 1.25; font-weight: 700; }
+.cert .by { color: #B8C6DD; font-size: 14px; }
+.cert .when { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); }
+.cert a.go { grid-column: 2; justify-self: start; margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid #1455B5; padding-bottom: 2px; }
+a.stat-link { color: inherit; text-decoration: none; display: block; }
+@media (max-width: 800px) { .certs-grid { grid-template-columns: minmax(0,1fr); } }
+</style>
 </head>
 <body class="intro-on">
 <div id="intro" aria-hidden="true">
@@ -100,7 +118,7 @@ body.intro-on .hero *, body.intro-on .hero *::before, body.intro-on .hero *::aft
     <section class="stats" id="stats" aria-label="Highlights">
       <div class="stat reveal"><div class="num"><span data-to="4">4</span><i>+</i></div><div class="chip"><b></b>Years of experience</div></div>
       <div class="stat reveal"><div class="num"><span data-to="100">100</span><i>%</i></div><div class="chip"><b></b>Trusted</div></div>
-      <div class="stat reveal"><div class="num"><span data-to="3">3</span></div><div class="chip"><b></b>Certifications</div></div>
+      <a class="stat reveal stat-link" href="#certificates"><div class="num"><span data-to="3">3</span></div><div class="chip"><b></b>Certifications</div></a>
     </section>
 
     <section id="work">
@@ -116,6 +134,21 @@ body.intro-on .hero *, body.intro-on .hero *::before, body.intro-on .hero *::aft
         <a class="row" href="#contact" data-g="d" data-l="AI tool"><span class="num">04</span><h3>Concept Four</h3><span class="desc">AI workflow · Prototype</span><span class="arr">→</span></a>
       </div>
       <p class="note-line mono">Placeholder titles. Swap in your real case studies.</p>
+    </section>
+
+    <section class="certs" id="certificates">
+      <div class="reveal"><span class="eyebrow mono">Credentials</span><h2 class="h-xl">Certifi-<br>cations</h2></div>
+      <div class="certs-grid">
+        <a class="cert-feature reveal" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open the Figma UI UX Design Essentials certificate (PDF)">
+          <img src="certificate-udemy.jpg" alt="Udemy Certificate of Completion: Figma UI UX Design Essentials, Manasse Mahunda, March 11, 2023" loading="lazy">
+          <span class="view">View certificate →</span>
+        </a>
+        <div class="cert-list">
+          <div class="cert reveal"><span class="n">01</span><h3>Figma UI UX Design Essentials</h3><span class="by">Udemy · 11.5 hours</span><span class="when mono">Mar 2023</span><a class="go" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener">View certificate</a></div>
+          <div class="cert reveal"><span class="n">02</span><h3>Responsive Website Basics: Code with HTML, CSS, and JavaScript</h3><span class="by">University of London · Coursera</span><span class="when mono">Jan 2024</span></div>
+          <div class="cert reveal"><span class="n">03</span><h3>Create High-Fidelity Designs and Prototypes in Figma</h3><span class="by">Coursera</span><span class="when mono">Jul 2024</span></div>
+        </div>
+      </div>
     </section>
 
     <section id="process">
