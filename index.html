@@ -67,6 +67,24 @@ body.intro-on .hero *, body.intro-on .hero *::before, body.intro-on .hero *::aft
 a.stat-link { color: inherit; text-decoration: none; display: block; }
 @media (max-width: 800px) { .certs-grid { grid-template-columns: minmax(0,1fr); } }
 </style>
+<style id="exp-css">
+.exp { padding-block: 40px 30px; }
+.exp-list { margin-top: 44px; border-top: 1px solid var(--line); }
+.xp { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,2fr); gap: 10px 40px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.xp .when { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); }
+.xp .where { margin-top: 8px; color: #B8C6DD; font-size: 14px; line-height: 1.5; }
+.xp h3 { margin: 0; font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(30px, 4.2vw, 56px); line-height: 1; }
+.xp .co { margin: 8px 0 12px; font-weight: 700; font-size: 16px; }
+.xp .co span { color: #B8C6DD; font-weight: 500; }
+.xp .about-co { margin: 0 0 12px; color: #B8C6DD; font-size: 14px; font-style: italic; }
+.xp ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; line-height: 1.55; }
+.xp li::marker { color: #1455B5; }
+.skills { margin-top: 44px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.chips span { padding: 12px 20px; border: 1px solid var(--line); border-radius: 999px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .02em; transition: background .3s, border-color .3s; }
+.chips span:hover { background: #1455B5; border-color: #1455B5; }
+@media (max-width: 800px) { .xp { grid-template-columns: minmax(0,1fr); } }
+</style>
 </head>
 <body class="intro-on">
 <div id="intro" aria-hidden="true">
@@ -84,7 +102,7 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
 <header class="nav">
   <a class="logo" href="#top" aria-label="Manasse Mahunda, home"><img src="logo.jpg" alt=""><span>Manasse</span></a>
   <nav class="pill" aria-label="Primary">
-    <a href="#work">Work</a><a href="#about">About</a><a href="Manasse_Mahunda_CV.pdf" target="_blank" rel="noopener">CV</a><a href="#process">Process</a><a href="#contact">Contact</a>
+    <a href="#work">Work</a><a href="#about">About</a><a href="#experience">CV</a><a href="#process">Process</a><a href="#contact">Contact</a>
   </nav>
   <a class="open" href="#contact"><i></i>Open to work</a>
 </header>
@@ -134,6 +152,20 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
         <a class="row" href="#contact" data-g="d" data-l="AI tool"><span class="num">04</span><h3>Concept Four</h3><span class="desc">AI workflow · Prototype</span><span class="arr">→</span></a>
       </div>
       <p class="note-line mono">Placeholder titles. Swap in your real case studies.</p>
+    </section>
+
+    <section class="exp" id="experience">
+      <div class="reveal"><span class="eyebrow mono">Curriculum vitae</span><h2 class="h-xl">Experience</h2></div>
+      <div class="exp-list">
+        <div class="xp reveal"><div><div class="when mono">Oct 2026 – Present</div><div class="where">Nigeria</div></div><div><h3>Ambassador</h3><p class="co">Cowrywise <span>· Full-time</span></p><ul><li>Represent Cowrywise in Nigeria, promoting its savings and investment products to new users and communities.</li><li>Share product knowledge and user feedback with the team to help improve how the product is understood and used.</li></ul></div></div>
+        <div class="xp reveal"><div><div class="when mono">Apr 2024 – Present</div><div class="where">United States</div></div><div><h3>Product Designer</h3><p class="co">Upwork <span>· Freelance</span></p><ul><li>Design web and mobile product interfaces for international clients, from user flows and wireframes to high-fidelity screens.</li><li>Build clickable Figma prototypes and design systems so clients can test ideas and developers can build with confidence.</li><li>Manage projects end to end: scoping, communication, revisions and on-time delivery.</li></ul></div></div>
+        <div class="xp reveal"><div><div class="when mono">Sep 2024 – Mar 2026</div><div class="where">United States · Remote</div></div><div><h3>Product Designer</h3><p class="co">SyntheticFi <span>· Full-time</span></p><p class="about-co">Helps independent financial advisors (RIAs) meet their clients' liquidity needs through lending.</p><ul><li>Designed fintech product experiences, turning complex lending and financial workflows into clear, simple interfaces.</li><li>Produced user flows, wireframes and high-fidelity prototypes in Figma, working closely with product and engineering.</li><li>Kept the interface consistent through reusable components and design standards.</li></ul></div></div>
+        <div class="xp reveal"><div><div class="when mono">May 2024 – Aug 2024</div><div class="where">United States · Remote</div></div><div><h3>Product Designer</h3><p class="co">Mise <span>· Full-time</span></p><p class="about-co">An AI general manager for restaurants, handling recurring admin work such as payroll and inventory.</p><ul><li>Designed screens and flows for an AI-driven restaurant operations product used by hands-on operators.</li><li>Designed review and approval interfaces so operators can quickly check the AI's work and decide with confidence.</li></ul></div></div>
+        <div class="xp reveal"><div><div class="when mono">Nov 2022 – Nov 2023</div><div class="where">United States · Remote</div></div><div><h3>Senior Product Designer</h3><p class="co">Popl <span>· Contract</span></p><p class="about-co">An AI-native go-to-market platform for lead capture at in-person events and conferences.</p><ul><li>Designed lead-capture experiences covering badge scanning, contact enrichment and CRM sync.</li><li>Led design on key product flows from concept to polished prototype, collaborating with product and engineering.</li><li>Simplified fast, in-the-moment interactions so users could capture leads quickly at busy events.</li></ul></div></div>
+        <div class="xp reveal"><div><div class="when mono">Apr 2023 – Aug 2023</div><div class="where">Nigeria · Remote</div></div><div><h3>Product Designer</h3><p class="co">Oriald (formerly staynaija) <span>· Full-time</span></p><p class="about-co">Building an AI-native operating system for hospitality, helping hotels understand operations and automate execution.</p><ul><li>Designed product interfaces for hotel and hospitality teams, from early concepts to clickable prototypes.</li><li>Turned operational data and workflows into clear, easy-to-scan screens.</li></ul></div></div>
+      </div>
+      <div class="skills reveal"><span class="eyebrow mono">Skills &amp; tools</span><div class="chips"><span>Figma</span><span>Framer</span><span>Adobe Photoshop</span><span>Visual Studio Code (VS Code)</span><span>Cursor</span><span>GitHub</span></div>
+        <div class="btns" style="margin-top:32px"><a class="btn pri" href="Manasse_Mahunda_CV.pdf" target="_blank" rel="noopener">Download full CV</a></div></div>
     </section>
 
     <section class="certs" id="certificates">
@@ -202,7 +234,7 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
 
 <footer class="foot">
   <div class="f-top">
-    <nav class="f-links" aria-label="Footer"><a href="#work">Work</a><a href="#about">About</a><a href="Manasse_Mahunda_CV.pdf" target="_blank" rel="noopener">CV</a><a href="#process">Process</a><a href="#notes">Playground</a><a href="#contact">Contact</a></nav>
+    <nav class="f-links" aria-label="Footer"><a href="#work">Work</a><a href="#about">About</a><a href="#experience">CV</a><a href="#process">Process</a><a href="#notes">Playground</a><a href="#contact">Contact</a></nav>
     <div class="f-soc"><a href="https://wa.me/2349121333315" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.9a8.1 8.1 0 1 1-4.2 15l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 0 1 12 3.9zM9 7.5c-.3 0-.6.1-.8.4-.4.4-1 1-1 2.300s1 2.700 1.200 2.900c.2.200 2 3.100 4.900 4.300 2.300.9 2.800.8 3.300.7.500-.1 1.600-.7 1.800-1.300.2-.6.2-1.200.2-1.300-.1-.1-.3-.2-.6-.4l-1.700-.8c-.3-.1-.5-.1-.7.1l-.8 1c-.1.200-.3.200-.6.100-.3-.1-1.100-.4-2.100-1.300-.8-.7-1.300-1.500-1.500-1.800-.1-.3 0-.4.100-.5l.4-.5.2-.4v-.4L10 7.900c-.2-.4-.4-.4-.6-.4z"/></svg></a><a href="#" aria-label="X"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Behance">Bē</a><a href="#" aria-label="LinkedIn">in</a></div>
   </div>
   <p class="f-copy">© <span id="yr">2026</span> - Designed &amp; Developed by Manasse Mahunda</p>
