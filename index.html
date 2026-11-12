@@ -119,6 +119,10 @@ html.ta .tx-h .tw { transform: translateY(.55em) rotate(2.5deg); transform-origi
 html.ta .tx.go .tw { opacity: 1; transform: none; filter: none; transition: opacity .7s cubic-bezier(.2,.8,.2,1) var(--d), transform .8s cubic-bezier(.2,.8,.2,1) var(--d), filter .7s ease var(--d); }
 @media (prefers-reduced-motion: reduce) { html.ta .tw { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; } }
 </style>
+<style id="scrolltext-css">
+html.sa .sw { opacity: .16; transition: opacity .18s linear; }
+@media (prefers-reduced-motion: reduce) { html.sa .sw { opacity: 1 !important; transition: none; } }
+</style>
 </head>
 <body class="intro-on">
 <div id="intro" aria-hidden="true">
@@ -521,7 +525,7 @@ window.NOTES_CFG = { url: "https://touowqlcfbgdgomuuziz.supabase.co", key: "sb_p
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (!("IntersectionObserver" in window)) return;
   var HEAD = ".h-xl, .cta h2, .xp h3, .process .step h3";
-  var COPY = ".about-copy .lead, .about-copy p, .works-head p, .pin-head p, .xp li, .xp .about-co, .xp .co, .process .step p, .cta p, .cinfo h3";
+  var COPY = ".works-head p, .pin-head p, .xp li, .xp .about-co, .xp .co, .process .step p, .cta p, .cinfo h3";
   var els = document.querySelectorAll(HEAD + "," + COPY);
   if (!els.length) return;
   document.documentElement.classList.add("ta");
@@ -554,6 +558,44 @@ window.NOTES_CFG = { url: "https://touowqlcfbgdgomuuziz.supabase.co", key: "sb_p
   });
   /* safety net: never leave text hidden */
   setTimeout(function () { els.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("go"); }); }, 7000);
+})();
+</script>
+<script id="scrolltext-js">
+/* Scroll-scrubbed text: About words light up as you scroll through them */
+(function () {
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var box = document.querySelector(".about-copy"); if (!box) return;
+  var parts = box.querySelectorAll(".lead, p"); if (!parts.length) return;
+  var words = [];
+  parts.forEach(function (el) {
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.nodeValue.split(/(\s+)/).forEach(function (p) {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(" ")); return; }
+            var s = document.createElement("span"); s.className = "sw"; s.textContent = p; words.push(s); frag.appendChild(s);
+          });
+          c.parentNode.replaceChild(frag, c);
+        } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c);
+      });
+    })(el);
+  });
+  var n = words.length; if (!n) return;
+  document.documentElement.classList.add("sa");
+  var first = parts[0], last = parts[parts.length - 1], ticking = false;
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight, top = first.getBoundingClientRect().top, h = last.getBoundingClientRect().bottom - top;
+    var p = clamp((vh * .85 - top) / (vh * .3 + h));
+    for (var i = 0; i < n; i++) words[i].style.opacity = (.16 + .84 * clamp((p * (n + 5) - i) / 5)).toFixed(3);
+  }
+  function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener("scroll", req, { passive: true });
+  window.addEventListener("resize", req);
+  update();
 })();
 </script>
 </body>
