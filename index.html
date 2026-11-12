@@ -85,6 +85,23 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
 .chips span:hover { background: #1455B5; border-color: #1455B5; }
 @media (max-width: 800px) { .xp { grid-template-columns: minmax(0,1fr); } }
 </style>
+<style id="certs2-css">
+.certs-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 24px !important; }
+.ccard { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #0a0a0a; }
+.cthumb { display: block; overflow: hidden; background: #fff; }
+.cthumb img { display: block; width: 100%; height: auto; aspect-ratio: 1.3; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.cthumb:hover img { transform: scale(1.04); }
+.cinfo { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 20px 22px 8px; }
+.cinfo .n { font-family: var(--display); font-size: 34px; line-height: 1; color: #1455B5; }
+.cinfo h3 { margin: 0 0 4px; font-size: clamp(16px, 1.7vw, 20px); line-height: 1.25; font-weight: 700; }
+.cinfo .by { display: block; color: #B8C6DD; font-size: 14px; }
+.cinfo .when { display: block; margin-top: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); }
+.cbtn { margin: 10px 22px 22px; align-self: flex-start; padding: 11px 18px; border-radius: 999px; background: #1455B5; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.cbtn:hover { background: #fff; color: #000; }
+.cvbtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.cvnote { margin: 14px 0 0; color: #B8C6DD; font-size: 13px; }
+@media (max-width: 800px) { .certs-grid { grid-template-columns: minmax(0,1fr) !important; } }
+</style>
 </head>
 <body class="intro-on">
 <div id="intro" aria-hidden="true">
@@ -136,7 +153,7 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
     <section class="stats" id="stats" aria-label="Highlights">
       <div class="stat reveal"><div class="num"><span data-to="4">4</span><i>+</i></div><div class="chip"><b></b>Years of experience</div></div>
       <div class="stat reveal"><div class="num"><span data-to="100">100</span><i>%</i></div><div class="chip"><b></b>Trusted</div></div>
-      <a class="stat reveal stat-link" href="#certificates"><div class="num"><span data-to="3">3</span></div><div class="chip"><b></b>Certifications</div></a>
+      <a class="stat reveal stat-link" href="#certificates"><div class="num"><span data-to="4">4</span></div><div class="chip"><b></b>Certifications</div></a>
     </section>
 
     <section id="work">
@@ -165,21 +182,17 @@ a.stat-link { color: inherit; text-decoration: none; display: block; }
         <div class="xp reveal"><div><div class="when mono">Apr 2023 – Aug 2023</div><div class="where">Nigeria · Remote</div></div><div><h3>Product Designer</h3><p class="co">Oriald (formerly staynaija) <span>· Full-time</span></p><p class="about-co">Building an AI-native operating system for hospitality, helping hotels understand operations and automate execution.</p><ul><li>Designed product interfaces for hotel and hospitality teams, from early concepts to clickable prototypes.</li><li>Turned operational data and workflows into clear, easy-to-scan screens.</li></ul></div></div>
       </div>
       <div class="skills reveal"><span class="eyebrow mono">Skills &amp; tools</span><div class="chips"><span>Figma</span><span>Framer</span><span>Adobe Photoshop</span><span>Visual Studio Code (VS Code)</span><span>Cursor</span><span>GitHub</span></div>
-        <div class="btns" style="margin-top:32px"><a class="btn pri" href="Manasse_Mahunda_CV.pdf" target="_blank" rel="noopener">Download full CV</a></div></div>
+        <div class="cvbtns btns"><a class="btn pri" href="Manasse_Mahunda_CV.pdf" target="_blank" rel="noopener">View CV (PDF)</a><a class="btn" href="Manasse_Mahunda_CV.pdf" download>Download PDF</a><a class="btn" href="Manasse_Mahunda_CV.docx" download>Open in WPS / Word</a></div>
+        <p class="cvnote">On your phone, "Open in WPS / Word" downloads an editable copy. Choose WPS Office, Word or Google Docs when your phone asks how to open it.</p></div>
     </section>
 
     <section class="certs" id="certificates">
       <div class="reveal"><span class="eyebrow mono">Credentials</span><h2 class="h-xl">Certifi-<br>cations</h2></div>
       <div class="certs-grid">
-        <a class="cert-feature reveal" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open the Figma UI UX Design Essentials certificate (PDF)">
-          <img src="certificate-udemy.jpg" alt="Udemy Certificate of Completion: Figma UI UX Design Essentials, Manasse Mahunda, March 11, 2023" loading="lazy">
-          <span class="view">View certificate →</span>
-        </a>
-        <div class="cert-list">
-          <div class="cert reveal"><span class="n">01</span><h3>Figma UI UX Design Essentials</h3><span class="by">Udemy · 11.5 hours</span><span class="when mono">Mar 2023</span><a class="go" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener">View certificate</a></div>
-          <div class="cert reveal"><span class="n">02</span><h3>Responsive Website Basics: Code with HTML, CSS, and JavaScript</h3><span class="by">University of London · Coursera</span><span class="when mono">Jan 2024</span></div>
-          <div class="cert reveal"><span class="n">03</span><h3>Create High-Fidelity Designs and Prototypes in Figma</h3><span class="by">Coursera</span><span class="when mono">Jul 2024</span></div>
-        </div>
+        <article class="ccard reveal"><a class="cthumb" href="Manasse_Mahunda_Uxcel_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open Introduction to Figma (PDF)"><img src="certificate-uxcel.jpg" alt="Uxcel certificate: Introduction to Figma" loading="lazy"></a><div class="cinfo"><span class="n">01</span><div><h3>Introduction to Figma</h3><span class="by">Uxcel</span><span class="when mono">Dec 2024</span></div></div><a class="cbtn" href="Manasse_Mahunda_Uxcel_Certificate.pdf" target="_blank" rel="noopener">View certificate →</a></article>
+        <article class="ccard reveal"><a class="cthumb" href="Manasse_Mahunda_UniversityOfLondon_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open Responsive Website Basics: Code with HTML, CSS, and JavaScript (PDF)"><img src="certificate-uol.jpg" alt="University of London certificate: Responsive Website Basics" loading="lazy"></a><div class="cinfo"><span class="n">02</span><div><h3>Responsive Website Basics: Code with HTML, CSS, and JavaScript</h3><span class="by">University of London · Coursera</span><span class="when mono">Jan 2024</span></div></div><a class="cbtn" href="Manasse_Mahunda_UniversityOfLondon_Certificate.pdf" target="_blank" rel="noopener">View certificate →</a></article>
+        <article class="ccard reveal"><a class="cthumb" href="Manasse_Mahunda_Google_Figma_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open Create High-Fidelity Designs and Prototypes in Figma (PDF)"><img src="certificate-google.jpg" alt="Google certificate: Create High-Fidelity Designs and Prototypes in Figma" loading="lazy"></a><div class="cinfo"><span class="n">03</span><div><h3>Create High-Fidelity Designs and Prototypes in Figma</h3><span class="by">Google · Coursera</span><span class="when mono">Jan 2024</span></div></div><a class="cbtn" href="Manasse_Mahunda_Google_Figma_Certificate.pdf" target="_blank" rel="noopener">View certificate →</a></article>
+        <article class="ccard reveal"><a class="cthumb" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener" aria-label="Open Figma UI UX Design Essentials (PDF)"><img src="certificate-udemy.jpg" alt="Udemy certificate: Figma UI UX Design Essentials" loading="lazy"></a><div class="cinfo"><span class="n">04</span><div><h3>Figma UI UX Design Essentials</h3><span class="by">Udemy · 11.5 hours</span><span class="when mono">Mar 2023</span></div></div><a class="cbtn" href="Manasse_Mahunda_Udemy_Certificate.pdf" target="_blank" rel="noopener">View certificate →</a></article>
       </div>
     </section>
 
