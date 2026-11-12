@@ -168,20 +168,82 @@
       M.Body.setAngularVelocity(b, b.angularVelocity + (vx * .004 + vy * .002 * side) * (side));
     }
     function local(e) { var r = pile.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+
+    // drag: grab a pill with a finger or the mouse, move it around and let go to throw it
+    var drag = null;
+    function hit(p) {
+      var bodies = items.map(function (it) { return it.b; });
+      var found = M.Query.point(bodies, p);
+      if (!found.length) {
+        // forgiving touch target: nearest pill centre within reach
+        var best = null, bd = 1e9;
+        items.forEach(function (it) { var dx = p.x - it.b.position.x, dy = p.y - it.b.position.y, d = Math.sqrt(dx * dx + dy * dy); if (d < it.h * .9 && d < bd) { bd = d; best = it.b; } });
+        return best;
+      }
+      return found[found.length - 1];
+    }
+    function startDrag(p) {
+      var b = hit(p); if (!b) return false;
+      var dx = p.x - b.position.x, dy = p.y - b.position.y, c = Math.cos(-b.angle), sn = Math.sin(-b.angle);
+      drag = { b: b, c: M.Constraint.create({ pointA: { x: p.x, y: p.y }, bodyB: b, pointB: { x: dx * c - dy * sn, y: dx * sn + dy * c }, stiffness: .16, damping: .12, length: 0 }) };
+      M.Composite.add(engine.world, drag.c);
+      pile.classList.add("grabbing");
+      return true;
+    }
+    function moveDrag(p) {
+      if (!drag) return;
+      drag.c.pointA.x = Math.max(0, Math.min(W, p.x)); drag.c.pointA.y = Math.max(-20, Math.min(H, p.y));
+    }
+    function endDrag() {
+      if (!drag) return;
+      M.Composite.remove(engine.world, drag.c);
+      var v = drag.b.velocity, m = Math.sqrt(v.x * v.x + v.y * v.y);
+      if (m > 38) M.Body.setVelocity(drag.b, { x: v.x * 38 / m, y: v.y * 38 / m });
+      drag = null; pile.classList.remove("grabbing");
+    }
+
+    // mouse / pen
+    pile.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return;
+      var p = local(e);
+      if (startDrag(p)) { try { pile.setPointerCapture(e.pointerId); } catch (er) {} return; }
+      items.forEach(function (it) { if (near(p, it)) push(it, (it.b.position.x - p.x) * .08 + (Math.random() - .5) * 4, -14 - Math.random() * 6, p); });
+    });
     pile.addEventListener("pointermove", function (e) {
       if (e.pointerType === "touch") return;
       var p = local(e);
+      if (drag) { moveDrag(p); last = p; return; }
       if (last) {
         var vx = (p.x - last.x) * .55, vy = (p.y - last.y) * .55;
         if (Math.abs(vx) + Math.abs(vy) > 1.5) items.forEach(function (it) { if (near(p, it)) push(it, vx, vy, p); });
       }
       last = p;
     });
+    pile.addEventListener("pointerup", function (e) { if (e.pointerType !== "touch") endDrag(); });
+    pile.addEventListener("pointercancel", function (e) { if (e.pointerType !== "touch") endDrag(); });
     pile.addEventListener("pointerleave", function () { last = null; });
-    pile.addEventListener("pointerdown", function (e) {
-      var p = local(e);
-      items.forEach(function (it) { if (near(p, it)) push(it, (it.b.position.x - p.x) * .08 + (Math.random() - .5) * 4, -14 - Math.random() * 6, p); });
-    });
+
+    // touch: only grabs when a finger lands on a pill, so the page still scrolls everywhere else
+    var tid = null;
+    function tpoint(e) {
+      for (var i = 0; i < e.touches.length; i++) if (e.touches[i].identifier === tid) return local(e.touches[i]);
+      return null;
+    }
+    pile.addEventListener("touchstart", function (e) {
+      if (drag) return;
+      var t = e.changedTouches[0];
+      if (startDrag(local(t))) { tid = t.identifier; e.preventDefault(); }
+    }, { passive: false });
+    pile.addEventListener("touchmove", function (e) {
+      if (!drag) return;
+      var p = tpoint(e); if (p) { moveDrag(p); e.preventDefault(); }
+    }, { passive: false });
+    function tend(e) {
+      if (!drag) return;
+      for (var i = 0; i < e.changedTouches.length; i++) if (e.changedTouches[i].identifier === tid) { endDrag(); tid = null; break; }
+    }
+    pile.addEventListener("touchend", tend);
+    pile.addEventListener("touchcancel", tend);
 
     new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(pile);
     window.addEventListener("resize", function () {
