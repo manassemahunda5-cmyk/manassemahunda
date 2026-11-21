@@ -139,6 +139,16 @@ html.sa .sw { opacity: .16; transition: opacity .18s linear; }
 .foot .pile { margin-top: 30px; }
 @media (max-width: 800px) { .foot .f-cols { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 </style>
+<style id="curtain-css">
+/* Pinned hero + content that slides up over it like a curtain (and slides back down when you scroll up) */
+.hero { position: sticky; top: 0; z-index: 0; transform-origin: 50% 0; will-change: transform, opacity; }
+.curtain { position: relative; z-index: 2; background: #000; border-radius: 34px 34px 0 0; overflow: hidden;
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 0 calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: 0 max(16px, env(safe-area-inset-left, 0px)) 0 max(16px, env(safe-area-inset-right, 0px));
+  box-shadow: 0 -40px 90px rgba(0,0,0,.7), 0 -1px 0 rgba(255,255,255,.12); }
+.curtain > .marquee { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); }
+@media (max-width: 700px) { .curtain { border-radius: 26px 26px 0 0; } }
+</style>
 </head>
 <body class="intro-on">
 <div id="intro" aria-hidden="true">
@@ -171,6 +181,7 @@ html.sa .sw { opacity: .16; transition: opacity .18s linear; }
     </div>
   </div>
 
+  <div class="curtain">
   <div class="marquee" aria-hidden="true"><div class="track" id="track"><span>Product thinking</span><span>UI / UX design</span><span>Systems design</span><span>AI workflows</span><span>Rapid prototyping</span><span>Design systems</span><span>Interaction design</span><span>Web &amp; mobile</span></div></div>
 
   <div class="wrap">
@@ -280,6 +291,7 @@ html.sa .sw { opacity: .16; transition: opacity .18s linear; }
       <div><dt class="mono">Phone</dt><dd><a href="tel:+2348124350795">08124350795</a></dd></div>
     </dl>
   </div>
+</div>
 </main>
 
 <footer class="foot">
@@ -618,6 +630,24 @@ window.NOTES_CFG = { url: "https://touowqlcfbgdgomuuziz.supabase.co", key: "sb_p
   window.addEventListener("scroll", req, { passive: true });
   window.addEventListener("resize", req);
   update();
+})();
+</script>
+<script id="curtain-js">
+(function () {
+  var hero = document.querySelector(".hero"); if (!hero) return;
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, ticking = false;
+  function fit() { hero.style.top = Math.min(0, window.innerHeight - hero.offsetHeight) + "px"; }
+  function update() {
+    ticking = false; if (reduce) return;
+    var p = Math.max(0, Math.min(1, window.scrollY / Math.max(hero.offsetHeight, 1)));
+    hero.style.transform = "scale(" + (1 - .06 * p).toFixed(4) + ")";
+    hero.style.opacity = (1 - .6 * p).toFixed(3);
+  }
+  function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  fit(); update();
+  window.addEventListener("resize", function () { fit(); req(); });
+  window.addEventListener("scroll", req, { passive: true });
+  window.addEventListener("load", function () { fit(); req(); });
 })();
 </script>
 </body>
