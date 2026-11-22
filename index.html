@@ -156,8 +156,8 @@ html.sa .sw { opacity: .16; transition: opacity .18s linear; }
 .pcard .pimg { position: relative; aspect-ratio: 1.12; border-radius: 28px; overflow: hidden; background: #0b2a1b; isolation: isolate; box-shadow: 0 30px 60px -34px rgba(0,0,0,.8); }
 .pcard .pimg > img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: transform .8s cubic-bezier(.2,.8,.2,1); z-index: -1; }
 .pcard:hover .pimg > img.bg { transform: scale(1.06); }
-.pcard .phone { position: absolute; left: 50%; bottom: -16%; width: min(46%, 230px); transform: translateX(-50%) translateY(0) rotate(0deg); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
-.pcard:hover .phone { transform: translateX(-50%) translateY(-5%) rotate(-2deg); }
+.pcard .phone { position: absolute; left: 50%; top: 50%; width: min(40%, 230px); transform: translate(-50%, -50%) rotate(0deg); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.pcard:hover .phone { transform: translate(-50%, -52%) rotate(-2deg); }
 .pcard .tagpill { position: absolute; left: 16px; top: 16px; padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
 .pcard .open-arrow { position: absolute; right: 16px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; font-size: 18px; transition: transform .4s, background .3s, color .3s; }
 .pcard:hover .open-arrow { transform: rotate(-45deg); background: #1455B5; color: #fff; }
